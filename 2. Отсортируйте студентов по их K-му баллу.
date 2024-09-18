@@ -1,0 +1,7 @@
+func sortTheStudents(score [][]int, k int) [][]int {
+    // Используем sort.Slice для сортировки по k-му экзамену
+	sort.Slice(score, func(i, j int) bool {
+		return score[i][k] > score[j][k] // Сортируем по убыванию
+	})
+	return score
+}
