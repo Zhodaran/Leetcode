@@ -1,0 +1,16 @@
+func numIdenticalPairs(nums []int) int {
+    countMap := make(map[int]int) // Создаем карту для подсчета частоты
+    goodPairs := 0                 // Инициализируем счетчик хороших пар
+
+    // Подсчитываем частоту каждого числа
+    for _, num := range nums {
+        countMap[num]++
+    }
+
+    // Вычисляем количество хороших пар
+    for _, count := range countMap {
+        goodPairs += count * (count - 1) / 2 // Добавляем количество пар для текущего числа
+    }
+
+    return goodPairs // Возвращаем общее количество хороших пар
+}
