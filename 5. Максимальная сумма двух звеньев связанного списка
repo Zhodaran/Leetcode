@@ -1,0 +1,30 @@
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func pairSum(head *ListNode) int {
+    // Сначала собираем значения узлов в массив
+	values := []int{}
+	current := head
+
+	for current != nil {
+		values = append(values, current.Val)
+		current = current.Next
+	}
+
+	// Теперь находим максимальную сумму близнецов
+	maxSum := 0
+	n := len(values)
+
+	for i := 0; i < n/2; i++ {
+		twinSum := values[i] + values[n-1-i]
+		if twinSum > maxSum {
+			maxSum = twinSum
+		}
+	}
+
+	return maxSum
+}
