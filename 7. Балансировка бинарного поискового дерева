@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func balanceBST(root *TreeNode) *TreeNode {
+    values := []int{}
+	inorderTraversal(root, &values) // Собираем значения узлов
+	return sortedArrayToBST(values, 0, len(values)-1) // Строим сбалансированное дерево
+}
+
+// Функция для вывода дерева в порядке обхода
+func printTree(node *TreeNode) {
+	if node == nil {
+		return
+	}
+	fmt.Print(node.Val, " ")
+	printTree(node.Left)
+	printTree(node.Right)
+}
+
+func inorderTraversal(root *TreeNode, values *[]int) {
+	if root == nil {
+		return
+	}
+	inorderTraversal(root.Left, values)
+	*values = append(*values, root.Val)
+	inorderTraversal(root.Right, values)
+}
+
+// Функция для построения сбалансированного BST из отсортированного массива
+func sortedArrayToBST(values []int, start, end int) *TreeNode {
+	if start > end {
+		return nil
+	}
+	mid := (start + end) / 2
+	root := &TreeNode{Val: values[mid]}
+	root.Left = sortedArrayToBST(values, start, mid-1)
+	root.Right = sortedArrayToBST(values, mid+1, end)
+	return root
+}
