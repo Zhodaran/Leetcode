@@ -1,0 +1,14 @@
+func finalValueAfterOperations(operations []string) int {
+    X := 0 // Изначально X равно 0
+
+    // Проходим по всем операциям
+    for _, operation := range operations {
+        if operation == "++X" || operation == "X++" {
+            X++ // Увеличиваем X на 1
+        } else if operation == "--X" || operation == "X--" {
+            X-- // Уменьшаем X на 1
+        }
+    }
+
+    return X // Возвращаем финальное значение X
+}
