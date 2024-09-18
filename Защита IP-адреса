@@ -1,0 +1,4 @@
+func defangIPaddr(address string) string {
+    // Заменяем все вхождения "." на "[.]"
+    return strings.ReplaceAll(address, ".", "[.]")
+}
