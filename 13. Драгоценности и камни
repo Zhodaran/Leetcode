@@ -1,0 +1,18 @@
+func numJewelsInStones(jewels string, stones string) int {
+    jewelSet := make(map[rune]struct{}) // Создаем множество для драгоценных камней
+    count := 0                           // Счетчик для количества драгоценных камней в ваших камнях
+
+    // Заполняем множество драгоценными камнями
+    for _, jewel := range jewels {
+        jewelSet[jewel] = struct{}{} // Используем пустую структуру для хранения уникальных драгоценных камней
+    }
+
+    // Проверяем каждый камень в ваших камнях
+    for _, stone := range stones {
+        if _, exists := jewelSet[stone]; exists {
+            count++ // Увеличиваем счетчик, если камень является драгоценным
+        }
+    }
+
+    return count // Возвращаем общее количество драгоценных камней
+}
