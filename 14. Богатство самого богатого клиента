@@ -1,0 +1,20 @@
+func maximumWealth(accounts [][]int) int {
+    maxWealth := 0 // Переменная для хранения максимального богатства
+
+    // Проходим по каждому клиенту
+    for _, account := range accounts {
+        currentWealth := 0 // Переменная для хранения богатства текущего клиента
+
+        // Суммируем богатство текущего клиента
+        for _, money := range account {
+            currentWealth += money
+        }
+
+        // Обновляем максимальное богатство, если текущее больше
+        if currentWealth > maxWealth {
+            maxWealth = currentWealth
+        }
+    }
+
+    return maxWealth // Возвращаем максимальное богатство
+}
