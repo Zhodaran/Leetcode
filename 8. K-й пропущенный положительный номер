@@ -1,0 +1,23 @@
+func findKthPositive(arr []int, k int) int {
+    missingCount := 0
+    current := 1
+    index := 0
+    n := len(arr)
+
+    // Пока не найдем k отсутствующих чисел
+    for missingCount < k {
+        // Если текущий элемент массива меньше или равен текущему числу
+        if index < n && arr[index] == current {
+            index++ // Переходим к следующему элементу массива
+        } else {
+            // Если текущий элемент отсутствует
+            missingCount++
+            if missingCount == k {
+                return current // Возвращаем текущее отсутствующее число
+            }
+        }
+        current++ // Переходим к следующему положительному числу
+    }
+
+    return -1 // Это не должно произойти, но на всякий случай
+}
