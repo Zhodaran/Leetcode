@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func mergeNodes(head *ListNode) *ListNode {
+    dummy := &ListNode{}
+	current := dummy
+	sum := 0
+
+	// Пропускаем первый ноль
+	for head != nil {
+		if head.Val == 0 {
+			if sum > 0 { // Если сумма больше 0, добавляем новый узел
+				current.Next = &ListNode{Val: sum}
+				current = current.Next
+				sum = 0 // Сбрасываем сумму
+			}
+		} else {
+			sum += head.Val // Суммируем значения узлов
+		}
+		head = head.Next // Переходим к следующему узлу
+	}
+
+	return dummy.Next // Возвращаем сл
+}
