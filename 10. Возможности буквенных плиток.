@@ -1,0 +1,29 @@
+func numTilePossibilities(tiles string) int {
+    uniqueSequences := make(map[string]struct{})
+	tilesRunes := []rune(tiles)
+	sort.Slice(tilesRunes, func(i, j int) bool {
+		return tilesRunes[i] < tilesRunes[j]
+	})
+
+	var backtrack func(path []rune, counter []int)
+	backtrack = func(path []rune, counter []int) {
+		if len(path) > 0 {
+			uniqueSequences[string(path)] = struct{}{}
+		}
+		for i := 0; i < len(counter); i++ {
+			if counter[i] > 0 {
+				counter[i]--
+				backtrack(append(path, tilesRunes[i]), counter)
+				counter[i]++
+			}
+		}
+	}
+
+	counter := make([]int, len(tilesRunes))
+	for i := 0; i < len(tilesRunes); i++ {
+		counter[i] = 1
+	}
+
+	backtrack([]rune{}, counter)
+	return len(uniqueSequences)
+}
