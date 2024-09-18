@@ -1,0 +1,21 @@
+func findSmallestSetOfVertices(n int, edges [][]int) []int {
+    // Массив для подсчета входящих ребер
+	inDegree := make([]int, n)
+
+	// Подсчитываем входящие ребра для каждой вершины
+	for _, edge := range edges {
+
+		to := edge[1]
+		inDegree[to]++ // Увеличиваем степень входа для вершины to
+	}
+
+	// Собираем вершины с нулевой степенью входа
+	result := []int{}
+	for i := 0; i < n; i++ {
+		if inDegree[i] == 0 {
+			result = append(result, i)
+		}
+	}
+
+	return result
+}
