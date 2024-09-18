@@ -1,0 +1,42 @@
+package main
+
+import (
+	"fmt"
+)
+
+// Используем предкомпилированный TreeNode
+// Предполагается, что структура TreeNode выглядит следующим образом:
+// type TreeNode struct {
+//     Val   int
+//     Left  *TreeNode
+//     Right *TreeNode
+// }
+
+func deepestLeavesSum(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	queue := []*TreeNode{root}
+	sumOfDeepestLeaves := 0
+
+	for len(queue) > 0 {
+		sumOfDeepestLeaves = 0 // Сбрасываем сумму на каждом уровне
+		levelSize := len(queue)
+
+		for i := 0; i < levelSize; i++ {
+			node := queue[0]
+			queue = queue[1:] // Удаляем первый элемент из очереди
+			sumOfDeepestLeaves += node.Val // Суммируем значения узлов текущего уровня
+
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+		}
+	}
+
+	return sumOfDeepestLeaves
+}
