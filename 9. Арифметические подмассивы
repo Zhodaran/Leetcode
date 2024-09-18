@@ -1,0 +1,36 @@
+func checkArithmeticSubarrays(nums []int, l []int, r []int) []bool {
+    m := len(l)
+	results := make([]bool, m)
+
+	for i := 0; i < m; i++ {
+		start := l[i]
+		end := r[i]
+		subArray := make([]int, end-start+1)
+
+		// Извлекаем подмассив
+		copy(subArray, nums[start:end+1])
+
+		// Сортируем подмассив
+		sort.Ints(subArray)
+
+		// Проверяем разности
+		if len(subArray) < 2 {
+			results[i] = false
+			continue
+		}
+
+		difference := subArray[1] - subArray[0]
+		isArithmetic := true
+
+		for j := 1; j < len(subArray)-1; j++ {
+			if subArray[j+1]-subArray[j] != difference {
+				isArithmetic = false
+				break
+			}
+		}
+
+		results[i] = isArithmetic
+	}
+
+	return results
+}
