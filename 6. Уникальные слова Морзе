@@ -1,0 +1,21 @@
+func uniqueMorseRepresentations(words []string) int {
+    // Массив кодов Морзе для каждой буквы от 'a' до 'z'
+    morseCodes := []string{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."}
+    
+    // Используем множество для хранения уникальных преобразований
+    uniqueTransformations := make(map[string]struct{})
+
+    // Преобразуем каждое слово в код Морзе
+    for _, word := range words {
+        morseWord := ""
+        for _, char := range word {
+            // Преобразуем букву в код Морзе
+            morseWord += morseCodes[char-'a']
+        }
+        // Добавляем преобразование в множество
+        uniqueTransformations[morseWord] = struct{}{}
+    }
+
+    // Возвращаем количество уникальных преобразований
+    return len(uniqueTransformations)
+}
