@@ -1,0 +1,20 @@
+func tribonacci(n int) int {
+    if n == 0 {
+        return 0
+    } else if n == 1 || n == 2 {
+        return 1
+    }
+
+    // Создаем массив для хранения значений Трибоначчи
+    trib := make([]int, n+1)
+    trib[0] = 0
+    trib[1] = 1
+    trib[2] = 1
+
+    // Заполняем массив значениями Трибоначчи
+    for i := 3; i <= n; i++ {
+        trib[i] = trib[i-1] + trib[i-2] + trib[i-3]
+    }
+
+    return trib[n]
+}
