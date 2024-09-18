@@ -1,0 +1,26 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func bstToGst(root *TreeNode) *TreeNode {
+    	sum := 0
+	var traverse func(node *TreeNode)
+	traverse = func(node *TreeNode) {
+		if node == nil {
+			return
+		}
+		// Сначала обходим правое поддерево
+		traverse(node.Right)
+		// Обновляем сумму и значение узла
+		sum += node.Val
+		node.Val = sum
+		// Затем обходим левое поддерево
+		traverse(node.Left)
+	}
+	traverse(root)
+	return root
+}
