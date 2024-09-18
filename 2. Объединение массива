@@ -1,0 +1,12 @@
+func getConcatenation(nums []int) []int {
+    n := len(nums)
+    ans := make([]int, 2*n) // Создаем массив длиной 2n
+
+    // Заполняем массив ans
+    for i := 0; i < n; i++ {
+        ans[i] = nums[i]         // Первые n элементов
+        ans[i+n] = nums[i]       // Следующие n элементов
+    }
+
+    return ans
+}
